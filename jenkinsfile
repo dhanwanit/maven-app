@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    environment{
+        PATH = "/opt/maven/bin:$PATH"
+    }
+    
+    stages {
+        stage("Source Code Clone"){
+            steps {
+                git branch: 'main', url: 'https://github.com/dhanwanit/jenkins-nodejs.git'
+            }
+        }
+        
+        stage("mvn build"){
+            
+            steps {
+                sh "java --version"
+                sh "mvn --version"
+                sh "mvn clean package"
+            }
+        }
+    }
+}
